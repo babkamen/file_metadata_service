@@ -22,7 +22,11 @@ app.post('/api/fileanalyse', upload.single('upfile'), function(req, res, next) {
 		filename: req.file.originalname,
 		size: req.file.size
 	});
-	fs.unlink(req.file.path);
+  
+	fs.unlink(req.file.path,(err) => {
+  if (err) console.error("Can't delete file",req.file.path);
+  console.log('Deleted file');
+});
 
 });
 
